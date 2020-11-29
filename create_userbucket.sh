@@ -92,7 +92,7 @@ EOF
 policy_exist=$(mc admin policy list ${instance} --json | jq -r .policy | grep ${new_user}-readwrite)
 if [ "$?" == "1" ]; then
   policy_add=$(mc admin policy add ${instance} ${new_user}-readwrite /tmp/minio_s3_policy.json --json | jq -r .status)
-  if [ ${new_bucket_result} == "error" ]; then
+  if [ ${policy_add} == "error" ]; then
     echo "Policy creation failed, exiting .."
     exit 1
   fi
