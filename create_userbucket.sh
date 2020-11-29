@@ -96,11 +96,11 @@ if [ "$?" == "1" ]; then
     echo "Policy creation failed, exiting .."
     exit 1
   fi
-  echo "Created new policy: ${new_user}-readwrite"
+  echo "New policy created: ${new_user}-readwrite"
 fi
 
-user_current_policy=$(mc admin user info ${instance} ${new_user} --json | jq -r .policyName)
-if [ "${user_current_policy}" != "${new_user}-readwrite" ]; then
+user_policy_exists=$(mc admin user info ${instance} ${new_user} --json | jq -r .policyName)
+if [ "${user_policy_exists}" != "${new_user}-readwrite" ]; then
   policy_set=$(mc admin policy set ${instance} ${new_user}-readwrite user=${new_user} --json | jq -r .status)
   if [ ${policy_set} == "error" ]; then
     echo "Setting policy failed, exiting .."
