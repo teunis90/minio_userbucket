@@ -108,3 +108,5 @@ if [ "${user_policy_exists}" != "${new_user}-readwrite" ]; then
   fi
   echo "Applied policy: ${new_user}-readwrite to user ${new_user}"
 fi
+
+# Something unrelated, demo Marc.
